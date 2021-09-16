@@ -1198,6 +1198,13 @@ objectdef obj_Hauler
 				call This.LootEntity ${Entities.Peek.ID} 1
 			}
 
+			;back to dropoff, once hauler is full, no longer wondering and checking other jetcans
+			if ${This.HaulerFull}
+			{
+				This.CurrentState:Set["DROPOFF"]
+				return
+			}
+
 			Entities:Dequeue
 			if ${Ship.CargoFreeSpace} < ${Ship.CargoMinimumFreeSpace}
 			{
